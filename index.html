@@ -1,1 +1,442 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background: #f4f4f4;
+}
+
+    header, .content, .footer {
+        background: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+
+    h1, h2 {
+        color: #0056b3;
+    }
+
+    a {
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .badge {
+        margin-right: 5px;
+        border: 1px solid #ddd; /* Placeholder for badges */
+    }
+
+    img.workflow {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto 20px;
+    }
+
+    .news, .release-list, .to-do-list {
+        background-color: #e7f3ff;
+        border-left: 4px solid #0056b3;
+        padding: 10px 20px;
+        margin: 20px 0;
+    }
+
+    .news strong, .release-list strong, .to-do-list strong {
+        color: #0056b3;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    .release-list {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 20px; /* Adjust as needed to create space for the checkboxes */
+    border-left: 4px solid #0056b3;
+    }
+
+    .release-list li {
+        position: relative;
+        padding-left: 30px; /* Adjust as needed for space between checkbox and text */
+        margin-bottom: 0.5em;
+        line-height: 1.5;
+        font-size: 16px;
+    }
+
+    .release-list li::before {
+        content: '';
+        position: absolute;
+        left: 3px; /* Position the pseudo-element between the bar and the text */
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        background-color: #fff; /* Background color for checkboxes */
+    }
+
+    .release-list li.done::before {
+        content: '✔';
+        text-align: center;
+        color: white;
+        background-color: #4caf50;
+    }
+
+    .release-list li.pending::before {
+        content: '';
+        border: 2px solid #ccc; /* Light grey border for pending items */
+    }
+
+    ul.to-do-list li::before {
+        content: '🔲';
+        display: inline-block;
+        width: 1.5em;
+        margin-left: -1.5em;
+    }
+
+    ul.to-do-list li.done::before {
+        content: '✅';
+        color: green;
+    }
+
+    blockquote {
+        border-left: 4px solid #ccc;
+        padding-left: 20px;
+        color: #555;
+    }
+    .note blockquote {
+    background-color: #ffefc3;
+    border-left: 4px solid #ffd54f;
+    }
+
+    .releases, .citation, .contribution, .todo-list, .detailed-list, .acknowledgements {
+        margin-bottom: 20px;
+    }
+
+    .release-list, .todo-list ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    /* .release-list li::before, .todo-list li::before {
+        content: '🔲';
+        margin-right: 10px;
+    } */
+
+    .release-done::before, .todo-done::before {
+        content: '✅';
+        color: green;
+        margin-right: 10px;
+    }
+
+    .release-pending::before {
+        content: '🔜';
+        color: orange;
+        margin-right: 10px;
+    }
+
+    pre code {
+        display: block;
+        padding: 15px;
+        background-color: #eee;
+        border-radius: 5px;
+        overflow-x: auto;
+    }
+
+    .acknowledgements h3 {
+        color: #555;
+    }
+
+    .collapsible {
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.25em;
+    }
+
+    .content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+    }
+
+    /* Detailed list item styles */
+    .detailed-list ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .detailed-list li {
+        position: relative;
+        padding-left: 30px; /* Space for the checkbox */
+        margin-bottom: 0.5em;
+    }
+
+    /* Adjust checkbox styles */
+    .detailed-list li::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        border: 2px solid #ccc;
+        background-color: rgb(255, 255, 255); /* White background for unchecked items */
+        box-sizing: border-box;
+    }
+
+    /* Checked items */
+    .detailed-list li.done::before {
+        content: '✔';
+        color: rgb(255, 255, 255);
+        background-color: #4caf50; /* Green background for checked items */
+        border-color: #4caf50;
+        text-align: center;
+        font-size: 10px;
+        line-height: 10px;
+    }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var coll = document.querySelector('.collapsible');
+            coll.addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        });
+        </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pose2Sim</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming you might have a CSS file -->
+</head>
+<body>
+    <a href="https://github.com/perfanalytics/pose2sim/actions/workflows/continuous-integration.yml">
+        <img src="https://github.com/perfanalytics/pose2sim/actions/workflows/continuous-integration.yml/badge.svg?branch=main" alt="Continuous integration">
+    </a>
+    <a href="https://badge.fury.io/py/Pose2Sim">
+        <img src="https://badge.fury.io/py/Pose2Sim.svg" alt="PyPI version">
+    </a>
+    <a href="https://pepy.tech/project/pose2sim">
+        <img src="https://static.pepy.tech/badge/pose2sim" alt="Downloads">
+    </a>
+    <a href="https://github.com/perfanalytics/pose2sim/stargazers">
+        <img src="https://img.shields.io/github/stars/perfanalytics/pose2sim" alt="Stars">
+    </a>
+    <a href="https://GitHub.com/perfanalytics/pose2sim/forks">
+        <img src="https://img.shields.io/github/forks/perfanalytics/pose2sim" alt="GitHub forks">
+    </a>
+    <a href="https://github.com/perfanalytics/pose2sim/issues">
+        <img src="https://img.shields.io/github/issues/perfanalytics/pose2sim" alt="GitHub issues">
+    </a>
+    <a href="https://GitHub.com/perfanalytics/pose2sim/issues?q=is%3Aissue+is%3Aclosed">
+        <img src="https://img.shields.io/github/issues-closed/perfanalytics/pose2sim" alt="GitHub issues-closed">
+    </a>
+    <a href="https://joss.theoj.org/papers/a31cb207a180f7ac9838d049e3a0de26">
+        <img src="https://joss.theoj.org/papers/a31cb207a180f7ac9838d049e3a0de26/status.svg" alt="status">
+    </a>
+    <a href="https://zenodo.org/doi/10.5281/zenodo.10658947">
+        <img src="https://zenodo.org/badge/501642916.svg" alt="DOI">
+    </a>
+    <a href="https://opensource.org/licenses/BSD-3-Clause">
+        <img src="https://img.shields.io/badge/License-BSD_3--Clause-blue.svg" alt="License">
+    </a>
+
+    <h1>Pose2Sim</h1>
+
+    <small>N.B:. Please set undistort_points and handle_LR_swap to false for now since it currently leads to inaccuracies. I'll try to fix it soon.</small>
+
+    <blockquote>
+        <strong>News: Version 0.8:</strong>
+        <ul>
+            <li>Automatic camera synchronization is now supported!</li>
+            <li>Other recently added features include: Multi-person analysis, Blender visualization, Marker augmentation, Automatic batch processing.</li>
+        </ul>
+        To upgrade, type <code>pip install pose2sim --upgrade</code>.
+    </blockquote>
+
+    <p><strong>Pose2Sim</strong> provides a workflow for 3D markerless kinematics, as an alternative to the more usual marker-based motion capture methods. It aims to provide a free tool to obtain research-grade results from consumer-grade equipment. Any combination of phone, webcam, GoPro, etc. can be used.</p>
+
+    <p>Pose2Sim stands for "OpenPose to OpenSim", as it uses OpenPose inputs (2D keypoints coordinates obtained from multiple videos) and leads to an OpenSim result (full-body 3D joint angles). Other 2D pose estimators such as BlazePose (MediaPipe), DeepLabCut, AlphaPose, can now be used as inputs.</p>
+
+    <p>If you can only use one single camera and don't mind losing some accuracy, please consider using <a href="https://github.com/davidpagnon/Sports2D">Sports2D</a>.</p>
+
+    <img src="https://raw.githubusercontent.com/perfanalytics/pose2sim/main/Content/Pose2Sim_workflow.jpg" alt="Pose2Sim Workflow" width="760">
+    <img src="https://github.com/perfanalytics/pose2sim/blob/main/Content/Activities_verylow.gif?raw=true" alt="Activities" title="Other more or less challenging tasks and conditions." width="760">
+
+    <!-- Add further sections as required -->
+    <section class="note">
+        <blockquote>
+            <p><em>N.B.:</em> As always, I am more than happy to welcome contributors (see <a href="#how-to-contribute">How to contribute</a>).</p>
+        </blockquote>
+    </section>
+    
+    <section class="releases">
+        <h2>Pose2Sim releases:</h2>
+        <ul class="release-list">
+            <li class="done"><strong>v0.1</strong> <em>(08/2021)</em>: Published paper</li>
+            <li class="done"><strong>v0.2</strong> <em>(01/2022)</em>: Published code</li>
+            <li class="done"><strong>v0.3</strong> <em>(01/2023)</em>: Supported other pose estimation algorithms</li>
+            <li class="done"><strong>v0.4</strong> <em>(07/2023)</em>: New calibration tool based on scene measurements</li>
+            <li class="done"><strong>v0.5</strong> <em>(12/2023)</em>: Automatic batch processing</li>
+            <li class="done"><strong>v0.6</strong> <em>(02/2024)</em>: Marker augmentation, Blender visualizer</li>
+            <li class="done"><strong>v0.7</strong> <em>(03/2024)</em>: Multi-person analysis</li>
+            <li class="done"><strong>v0.8</strong> <strong><em>(04/2024)</em>: New synchronization tool</strong></li>
+            <li class="pending"><strong>v0.9</strong>: Calibration based on keypoint detection, Handling left/right swaps, Correcting lens distortions</li>
+            <li class="pending"><strong>v0.10</strong>: Graphical User Interface</li>
+            <li class="pending"><strong>v1.0</strong>: First accomplished release</li>
+        </ul>
+    </section>
+    
+    <section class="citation">
+        <h2>How to cite and how to contribute</h2>
+        <h3>How to cite</h3>
+        <p>If you use this code or data, please cite <a href="https://doi.org/10.21105/joss.04362">Pagnon et al., 2022b</a>, <a href="https://www.mdpi.com/1424-8220/22/7/2712">Pagnon et al., 2022a</a>, or <a href="https://www.mdpi.com/1424-8220/21/19/6530">Pagnon et al., 2021</a>.</p>
+        <pre><code>
+        @Article{Pagnon_2022_JOSS, 
+          AUTHOR = {Pagnon, David and Domalain, Mathieu and Reveret, Lionel}, 
+          TITLE = {Pose2Sim: An open-source Python package for multiview markerless kinematics}, 
+          JOURNAL = {Journal of Open Source Software}, 
+          YEAR = {2022},
+          DOI = {10.21105/joss.04362}, 
+          URL = {https://joss.theoj.org/papers/10.21105/joss.04362}
+        }
+    
+        @Article{Pagnon_2022_Accuracy,
+          AUTHOR = {Pagnon, David and Domalain, Mathieu and Reveret, Lionel},
+          TITLE = {Pose2Sim: An End-to-End Workflow for 3D Markerless Sports Kinematics—Part 2: Accuracy},
+          JOURNAL = {Sensors},
+          YEAR = {2022},
+          DOI = {10.3390/s22072712},
+          URL = {https://www.mdpi.com/1424-8220/22/7/2712}
+        }
+    
+        @Article{Pagnon_2021_Robustness,
+          AUTHOR = {Pagnon, David and Domalain, Mathieu and Reveret, Lionel},
+          TITLE = {Pose2Sim: An End-to-End Workflow for 3D Markerless Sports Kinematics—Part 1: Robustness},
+          JOURNAL = {Sensors},
+          YEAR = {2021},
+          DOI = {10.3390/s21196530},
+          URL = {https://www.mdpi.com/1424-8220/21/19/6530}
+        }
+        </code></pre>
+    </section>
+    
+    <section class="contribution">
+        <h3>How to contribute</h3>
+        <p>I would happily welcome any proposal for new features, code improvement, and more! If you want to contribute to Pose2Sim, please see <a href="https://github.com/perfanalytics/pose2sim/issues/40">this issue</a>. You will be proposed a to-do list, but please feel absolutely free to propose your own ideas and improvements.</p>
+    </section>
+    
+    <section class="releases">
+        <h2>Main To-Do List:</h2>
+        <ul class="release-list">
+            <li class="done"><strong>synchronization</strong></li>
+            <li class="pending"><strong>Graphical User Interface</strong></li>
+            <li class="pending"><strong>Self-calibration based on keypoint detection</strong></li>
+        </ul>
+    </section>
+    
+    <section class="detailed-list">
+        <h4 class="collapsible">Detailed GOT-DONE and TO-DO list</h4>
+        <div class="content">
+            <h5>Pose</h5>
+            <ul>
+                <li class="done">Support OpenPose <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose_train/tree/master/experimental_models#body_25b-model---option-2-recommended">body_25b</a> for more accuracy, <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose_train/tree/master/experimental_models#single-network-whole-body-pose-estimation-model">body_135</a> for pronation/supination.</li>
+                <li class="done">Support <a href="https://developers.google.com/mediapipe/solutions/vision/pose_landmarker">BlazePose</a> for faster inference (on mobile device).</li>
+                <li class="done">Support <a href="http://www.mackenziemathislab.org/deeplabcut">DeepLabCut</a> for training on custom datasets.</li>
+                <li class="done">Support <a href="https://github.com/MVIG-SJTU/AlphaPose">AlphaPose</a> as an alternative to OpenPose.</li>
+                <li class="done">Define custom model in config.toml rather than in skeletons.py.</li>
+                <li class="pending">Support <a href="https://github.com/open-mmlab/mmpose">MMPose</a>, <a href="https://sleap.ai/">SLEAP</a>, etc.</li>
+                <li class="pending">Directly reading from DeepLabCut .csv or .h5 files instead of converting to .json.</li>
+                <li class="pending">GUI help for DeepLabCut model creation.</li>
+            </ul>
+            <h5>Calibration</h5>
+            <ul>
+                <li class="done">Convert <a href="https://www.qualisys.com">Qualisys</a> .qca.txt calibration file.</li>
+                <li class="done">Convert <a href="https://optitrack.com/">Optitrack</a> extrinsic calibration file.</li>
+                <li class="done">Convert <a href="http://www.vicon.com/Software/Nexus">Vicon</a> .xcp calibration file.</li>
+                <li class="done">Convert <a href="https://www.opencap.ai/">OpenCap</a> .pickle calibration files.</li>
+                <li class="done">Convert <a href="https://github.com/zju3dv/EasyMocap/">EasyMocap</a> .yml calibration files.</li>
+                <li class="done">Convert <a href="https://github.com/camera-mc-dev/.github/blob/main/profile/mocapPipe.md">bioCV</a> calibration files.</li>
+                <li class="done">Easier and clearer calibration procedure: separate intrinsic and extrinsic parameter calculation.</li>
+                <li class="pending">Once object points have been detected, track them for live calibration of moving cameras.</li>
+                <li class="pending">Calibrate cameras by pairs and compute average extrinsic calibration.</li>
+                <li class="pending">Fine-tune calibration with bundle adjustment.</li>
+            </ul>
+            <h5>Triangulation</h5>
+            <ul>
+                <li class="done">Triangulation weighted with confidence.</li>
+                <li class="done">Show mean reprojection error in px and in mm for each keypoint.</li>
+                <li class="pending">Implement normalized DLT and RANSAC triangulation, Outlier rejection.</li>
+            </ul>
+            <h5>Filtering</h5>
+            <ul>
+                <li class="done">Available filtering methods: Butterworth, Butterworth on speed, Gaussian, Median, LOESS.</li>
+                <li class="done">Implement Kalman filter and Kalman smoother.</li>
+                <li class="pending">Implement <a href="https://github.com/perfanalytics/pose2sim/issues/29">smoothNet</a>.</li>
+            </ul>
+            <h5>OpenSim</h5>
+            <ul>
+                <li class="done">Integrate better spine from <a href="https://pubmed.ncbi.nlm.nih.gov/30714401">lifting fullbody model</a> to the <a href="https://nmbl.stanford.edu/wp-content/uploads/07505900.pdf">gait full-body model</a>.</li>
+                <li class="pending">Implement optimal fixed-interval Kalman smoothing for inverse kinematics.</li>
+            </ul>
+            <h5>GUI</h5>
+            <ul>
+                <li class="done">Blender add-on (cf <a href="https://blendermarket.com/products/mocap-mpp2soss">MPP2SOS</a>).</li>
+                <li class="pending">3D plot of cameras and of triangulated keypoints.</li>
+            </ul>
+            <h5>Demo</h5>
+            <ul>
+                <li class="done">Provide Demo data for users to test the code.</li>
+                <li class="pending">Add videos for users to experiment with other pose detection frameworks.</li>
+            </ul>
+            <h5>Documentation</h5>
+            <ul>
+                <li class="pending">Use <a href="https://www.sphinx-doc.org/en/master">Sphinx</a>, <a href="https://www.mkdocs.org">MkDocs</a>, or <a href="https://docs.github.com/fr/pages/quickstart">github.io</a> for clearer documentation.</li>
+            </ul>
+            <h5>Bugs</h5>
+            <ul>
+                <li class="done"><strong>Bug:</strong> FFMPEG error message when calibration files are images.</li>
+                <li class="pending"><strong>Bug:</strong> Python crashes after a few runs of <code>Pose2Sim.filtering()</code> when <code>display_figures=true</code>.</li>
+            </ul>
+        </div>
+    </section>
+    
+    
+    <section>
+        <h4>Acknowledgements:</h4>
+        <ul>
+            <li>Supervised my PhD: <a href="https://github.com/lreveret">@lreveret</a> (INRIA, Université Grenoble Alpes), and <a href="https://github.com/mdomalai">@mdomalai</a> (Université de Poitiers).</li>
+            <li>Provided the Demo data: <a href="https://github.com/aaiaueil">@aaiaueil</a> from Université Gustave Eiffel.</li>
+            <li>Tested the code and provided feedback: <a href="https://github.com/simonozan">@simonozan</a>, <a href="https://github.com/daeyongyang">@daeyongyang</a>, <a href="https://github.com/ANaaim">@ANaaim</a>, <a href="https://github.com/rlagnsals">@rlagnsals</a></li>
+            <li>Submitted various accepted pull requests: <a href="https://github.com/ANaaim">@ANaaim</a>, <a href="https://github.com/rlagnsals">@rlagnsals</a></li>
+            <li>Provided a code snippet for Optitrack calibration: <a href="https://github.com/claraaudap">@claraaudap</a> (Université Bretagne Sud).</li>
+            <li>Issued MPP2SOS, a (non-free) Blender extension based on Pose2Sim: <a href="https://github.com/carlosedubarreto">@carlosedubarreto</a></li>
+        </ul>
+    </section>
+    
+</body>
+</html>
